@@ -63,7 +63,17 @@ public class TextValidator {
         return -1;
     }
 
+    private ValidationResult finishWithResult(boolean result) {
+        System.out.print(" - result: `" + result + "`");
+        return new ValidationResult(result);
+    }
+
     public ValidationResult run() {
+
+        System.out.println("\n---------");
+        System.out.println(" - text input:");
+        String _str = inputString.replaceAll("\n", "\n\t");
+        System.out.println("\t```\n\t"+_str+"\n\t```\n");
 
         int cursor = 0;
 
@@ -90,7 +100,7 @@ public class TextValidator {
                 if (c < 0) {
                     // no closing */ found
                     // todo: should we consider this as GOOD ?
-                    return new ValidationResult(true);
+                    return finishWithResult(true);
                 }
                 // ignore all the contents in between
                 cursor += c;
@@ -98,20 +108,20 @@ public class TextValidator {
             }
             if (equalAt(cursor, "*/")) {
                 // if a */ closing without a /* opening, simply fail it
-                return new ValidationResult(false);
+                return finishWithResult(false);
             }
 
             // so, we got a char which is not //, /* nor */
             //      validate parenthesis matching using a stack
             if ( ! checkPair( String.valueOf(inputCharSeq[cursor]) )) {
-                return new ValidationResult(false);
+                return finishWithResult(false);
             }
 
             cursor++;
         }
 
         // Make sure stack is empty at this point
-        return new ValidationResult(
+        return finishWithResult(
                 stack.isEmpty()
         );
     }

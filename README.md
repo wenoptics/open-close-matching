@@ -36,8 +36,345 @@ closing quotes as comments that can be ignored.  Either way is okay.
 
 ## Full Test Cases Output:
 
-As in `TextValidatorTest.java`
+As in `TextValidatorTest.java` (run as JUnit 5)
 
+---------
+ - text input:
+	```
+	()
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	[(({}))]
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	[(({}{}))]
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	[(({}{})]
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	[(({}abc{})]
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	[(({}abc{}))]
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	[(({}abc{a}b))c]
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	[(({}abc{a}b)c]
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	)
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	(
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	{{
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	{)
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	abc)
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	[(({}ab
+	
+	c{a}b)
+	)c]
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	
+	[(({}abc{a}b
+	)c]
+	
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	
+	
+	
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	
+	)
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	
+	(
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	{
+	   void hi() {}
+	}
+	
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	{ // abc
+	   void hello() {}
+	}
+	
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	{ // (()){{}}[][]
+	   void hello() {}
+	} // ()()(){{}}
+	
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	{ // (
+	   void hello() {}
+	} // (
+	
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	{ // (]{]
+	   void hello() {}
+	} // (}}
+	
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	{ // (]{]
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	// { // (]{]
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	void hello() {
+	    nice code! /**/
+	}
+	
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	void hello() {
+	    nice code! /*comment*/
+	}
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	void hello() {
+	    nice code! /*com(((ment*/
+	}
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	void hello() { /*com((({]ment*/
+	    nice code! /*com((({]ment*/
+	} /*com((({]ment*/
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	/*com((({]ment*/
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	/**/
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	/*//*/
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	/*//////////////*/
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	/*cot*/
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	/*com((({]*/
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	/*((({]ment*/
+	```
+
+ - result: `true`
+---------
+ - text input:
+	```
+	void hello(/*) { com((({]ment*/
+	    nice code! /*com((({]ment*/
+	} /*com((({]ment*/
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	void hello(/*) { com((({]ment
+	    nice code! /*com((({]ment*/
+	} /*com((({]ment*/
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	void hello() { /*com((({]ment
+	    nice code! /*com((({]ment*/
+	/*} com((({]ment*/
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	*/
+	```
+
+ - result: `false`
+---------
+ - text input:
+	```
+	void hello() { com((({]ment
+	    nice code! com((({]ment*/
+	/*} com((({]ment*/
+	```
+
+ - result: `false`
+Process finished with exit code 0
 
 
 
