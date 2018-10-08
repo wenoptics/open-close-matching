@@ -23,6 +23,10 @@ and single) -- do you want to check what is inside of them for
 opening and closings or treat what is inside the opening and 
 closing quotes as comments that can be ignored.  Either way is okay.
 
+## Demo .class
+
+as `src/demo.java`.
+
 ## Sample Output
 
 |         case        | output |
