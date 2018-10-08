@@ -23,3 +23,22 @@ and single) -- do you want to check what is inside of them for
 opening and closings or treat what is inside the opening and 
 closing quotes as comments that can be ignored.  Either way is okay.
 
+## Sample Output
+
+|         case        | output |
+|---------------------|--------|
+| `[({a}{abc})]`      |`true`  |
+| `{[abc(}`           |`false` |
+| `{() /*abc*/ }`     |`true`  |
+| `{ /*((}*/ }`       |`true`  |
+| `{() /* }* /`       |`false` |
+
+
+## Full Test Cases Output:
+
+As in `TextValidatorTest.java`
+
+
+
+
+  
