@@ -40,147 +40,147 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 
 ---------
 
- - text input:
+  - text input:
 
 	```
 	()
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	[(({}))]
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	[(({}{}))]
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	[(({}{})]
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	[(({}abc{})]
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	[(({}abc{}))]
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	[(({}abc{a}b))c]
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	[(({}abc{a}b)c]
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	)
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	(
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	{{
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	{)
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	abc)
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	[(({}ab
@@ -189,11 +189,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	)c]
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	
@@ -202,11 +202,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	
@@ -214,33 +214,33 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	
 	)
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	
 	(
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	{
@@ -249,11 +249,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	{ // abc
@@ -262,11 +262,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	{ // (()){{}}[][]
@@ -275,11 +275,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	{ // (
@@ -288,11 +288,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	{ // (]{]
@@ -301,31 +301,31 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	{ // (]{]
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	// { // (]{]
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	void hello() {
@@ -334,11 +334,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	void hello() {
@@ -346,11 +346,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	}
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	void hello() {
@@ -358,11 +358,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	}
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	void hello() { /*com((({]ment*/
@@ -370,81 +370,81 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	} /*com((({]ment*/
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	/*com((({]ment*/
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	/**/
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	/*//*/
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	/*//////////////*/
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	/*cot*/
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	/*com((({]*/
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	/*((({]ment*/
 	```
 
+  - result: `true`
 
- - result: `true`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	void hello(/*) { com((({]ment*/
@@ -452,11 +452,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	} /*com((({]ment*/
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	void hello(/*) { com((({]ment
@@ -464,11 +464,11 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	} /*com((({]ment*/
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	void hello() { /*com((({]ment
@@ -476,21 +476,21 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	/*} com((({]ment*/
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	*/
 	```
 
+  - result: `false`
 
- - result: `false`
 ---------
 
- - text input:
+  - text input:
 
 	```
 	void hello() { com((({]ment
@@ -498,7 +498,7 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	/*} com((({]ment*/
 	```
 
+  - result: `false`
 
- - result: `false`
- 
+
 Process finished with exit code 0
