@@ -108,5 +108,82 @@ class TextValidatorTest {
     @Test
     void test_5() {
 
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "void hello() {"      + NEWLINE +
+                "    nice code! /**/" + NEWLINE +
+                "}"                   + NEWLINE
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "void hello() {"             + NEWLINE +
+                "    nice code! /*comment*/" + NEWLINE +
+                "}"
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "void hello() {"                +NEWLINE +
+                "    nice code! /*com(((ment*/" +NEWLINE +
+                "}"
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "void hello() { /*com((({]ment*/" +NEWLINE +
+                "    nice code! /*com((({]ment*/" +NEWLINE +
+                "} /*com((({]ment*/"
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "/*com((({]ment*/").run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "/**/").run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "/*//*/").run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "/*//////////////*/").run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "/*cot*/").run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "/*com((({]*/").run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(""+
+                "/*((({]ment*/").run().isGood);
+
+    }
+
+    @Test
+    void test_6() {
+        Assertions.assertEquals(false, new TextValidator(""+
+                "void hello(/*) { com((({]ment*/" +NEWLINE +
+                "    nice code! /*com((({]ment*/" +NEWLINE +
+                "} /*com((({]ment*/"
+        ).run().isGood);
+
+        Assertions.assertEquals(false, new TextValidator(""+
+                "void hello(/*) { com((({]ment"   +NEWLINE +
+                "    nice code! /*com((({]ment*/" +NEWLINE +
+                "} /*com((({]ment*/"
+        ).run().isGood);
+
+        Assertions.assertEquals(false, new TextValidator(""+
+                "void hello() { /*com((({]ment"   +NEWLINE +
+                "    nice code! /*com((({]ment*/" +NEWLINE +
+                "/*} com((({]ment*/"
+        ).run().isGood);
+
+        Assertions.assertEquals(false, new TextValidator(""+
+                "*/"
+        ).run().isGood);
+
+        Assertions.assertEquals(false, new TextValidator(""+
+                "void hello() { com((({]ment"   +NEWLINE +
+                "    nice code! com((({]ment*/" +NEWLINE +
+                "/*} com((({]ment*/"
+        ).run().isGood);
     }
 }

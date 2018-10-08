@@ -11,11 +11,6 @@ public class TextValidator {
         }
     }
 
-    private class Pairing {
-        public char open;
-        public char close;
-    }
-
     private static HashMap<String, String> pairingRules;
     private static String[] LineBreaks = {"\n", "\r"};
 
@@ -74,21 +69,6 @@ public class TextValidator {
 
         while (cursor < inputCharSeq.length) {
 
-            String s = String.valueOf(inputCharSeq[cursor]);
-
-            /*// a state machine to process different scenario
-            switch (lastSpecial) {
-                case "//":
-                    // skip to the line end
-                    int c = skipTo(cursor, LineBreaks);
-                    if (c < 0) {
-                        // no line break found
-                        return new ValidationResult(true);
-                    }
-                    cursor += c;
-                    continue;
-            }*/
-
             if (equalAt(cursor, "//")) {
                 cursor += 2;
 
@@ -98,11 +78,32 @@ public class TextValidator {
                     // no line break found
                     break;
                 }
+                // ignore all the contents in between
                 cursor += c;
                 continue;
             }
+            if (equalAt(cursor, "/*")) {
+                cursor += 2;
 
-            if (!checkPair(s)) {
+                // skip to the first closing */ */
+                int c = skipTo(cursor, new String[]{"*/"});
+                if (c < 0) {
+                    // no closing */ found
+                    // todo: should we consider this as GOOD ?
+                    return new ValidationResult(true);
+                }
+                // ignore all the contents in between
+                cursor += c;
+                continue;
+            }
+            if (equalAt(cursor, "*/")) {
+                // if a */ closing without a /* opening, simply fail it
+                return new ValidationResult(false);
+            }
+
+            // so, we got a char which is not //, /* nor */
+            //      validate parenthesis matching using a stack
+            if ( ! checkPair( String.valueOf(inputCharSeq[cursor]) )) {
                 return new ValidationResult(false);
             }
 
