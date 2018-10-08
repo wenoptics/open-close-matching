@@ -20,7 +20,6 @@ public class TextValidator {
     private static String[] LineBreaks = {"\n", "\r"};
 
     private Stack<String> stack;
-    private String lastSpecial;
 
     private String inputString;
     private char[] inputCharSeq;
@@ -97,7 +96,7 @@ public class TextValidator {
                 int c = skipTo(cursor, LineBreaks);
                 if (c < 0) {
                     // no line break found
-                    return new ValidationResult(true);
+                    break;
                 }
                 cursor += c;
                 continue;
@@ -121,7 +120,6 @@ public class TextValidator {
         inputCharSeq = input.toCharArray();
 
         stack = new Stack<>();
-        lastSpecial = null;
 
         pairingRules = new HashMap<>();
         pairingRules.put("(", ")");

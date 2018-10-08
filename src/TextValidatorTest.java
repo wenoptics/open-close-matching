@@ -70,30 +70,43 @@ class TextValidatorTest {
 
         Assertions.assertTrue(
                 new TextValidator("" +
-                        "{ // abc" +
-                        "   void hello() {}" +
-                        "}" +
+                        "{ // abc" +           NEWLINE +
+                        "   void hello() {}" + NEWLINE +
+                        "}" +                  NEWLINE +
                         "").run().isGood);
 
         Assertions.assertTrue(
                 new TextValidator("" +
-                        "{ // (()){{}}[][]" +
-                        "   void hello() {}" +
-                        "} // ()()(){{}}" +
+                        "{ // (()){{}}[][]" +  NEWLINE +
+                        "   void hello() {}" + NEWLINE +
+                        "} // ()()(){{}}" +    NEWLINE +
                         "").run().isGood);
 
         Assertions.assertTrue(
                 new TextValidator("" +
-                        "{ // (" +
-                        "   void hello() {}" +
-                        "} // (" +
+                        "{ // (" +             NEWLINE +
+                        "   void hello() {}" + NEWLINE +
+                        "} // (" +             NEWLINE +
                         "").run().isGood);
 
         Assertions.assertTrue(
                 new TextValidator("" +
-                        "{ // (]{]" +
-                        "   void hello() {}" +
-                        "} // (}}" +
+                        "{ // (]{]" +          NEWLINE +
+                        "   void hello() {}" + NEWLINE +
+                        "} // (}}" +           NEWLINE +
                         "").run().isGood);
+
+        Assertions.assertFalse(
+                new TextValidator("" +
+                        "{ // (]{]").run().isGood);
+
+        Assertions.assertTrue(
+                new TextValidator("" +
+                        "// { // (]{]").run().isGood);
+    }
+
+    @Test
+    void test_5() {
+
     }
 }
