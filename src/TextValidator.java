@@ -64,16 +64,16 @@ public class TextValidator {
     }
 
     private ValidationResult finishWithResult(boolean result) {
-        System.out.print(" - result: `" + result + "`");
+        System.out.print("\n - result: `" + result + "`");
         return new ValidationResult(result);
     }
 
     public ValidationResult run() {
 
         System.out.println("\n---------");
-        System.out.println(" - text input:");
+        System.out.println("\n - text input:");
         String _str = inputString.replaceAll("\n", "\n\t");
-        System.out.println("\t```\n\t"+_str+"\n\t```\n");
+        System.out.println("\n\t```\n\t"+_str+"\n\t```\n");
 
         int cursor = 0;
 

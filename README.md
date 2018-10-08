@@ -39,105 +39,149 @@ closing quotes as comments that can be ignored.  Either way is okay.
 As in `TextValidatorTest.java` (run as JUnit 5)
 
 ---------
+
  - text input:
+
 	```
 	()
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	[(({}))]
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	[(({}{}))]
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	[(({}{})]
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	[(({}abc{})]
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	[(({}abc{}))]
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	[(({}abc{a}b))c]
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	[(({}abc{a}b)c]
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	)
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	(
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	{{
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	{)
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	abc)
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	[(({}ab
 	
@@ -145,9 +189,12 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	)c]
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	
 	[(({}abc{a}b
@@ -155,34 +202,46 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	
 	
 	
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	
 	)
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	
 	(
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	{
 	   void hi() {}
@@ -190,9 +249,12 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	{ // abc
 	   void hello() {}
@@ -200,9 +262,12 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	{ // (()){{}}[][]
 	   void hello() {}
@@ -210,9 +275,12 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	{ // (
 	   void hello() {}
@@ -220,9 +288,12 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	{ // (]{]
 	   void hello() {}
@@ -230,23 +301,32 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	{ // (]{]
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	// { // (]{]
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	void hello() {
 	    nice code! /**/
@@ -254,128 +334,171 @@ As in `TextValidatorTest.java` (run as JUnit 5)
 	
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	void hello() {
 	    nice code! /*comment*/
 	}
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	void hello() {
 	    nice code! /*com(((ment*/
 	}
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	void hello() { /*com((({]ment*/
 	    nice code! /*com((({]ment*/
 	} /*com((({]ment*/
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	/*com((({]ment*/
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	/**/
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	/*//*/
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	/*//////////////*/
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	/*cot*/
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	/*com((({]*/
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	/*((({]ment*/
 	```
 
+
  - result: `true`
 ---------
+
  - text input:
+
 	```
 	void hello(/*) { com((({]ment*/
 	    nice code! /*com((({]ment*/
 	} /*com((({]ment*/
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	void hello(/*) { com((({]ment
 	    nice code! /*com((({]ment*/
 	} /*com((({]ment*/
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	void hello() { /*com((({]ment
 	    nice code! /*com((({]ment*/
 	/*} com((({]ment*/
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	*/
 	```
 
+
  - result: `false`
 ---------
+
  - text input:
+
 	```
 	void hello() { com((({]ment
 	    nice code! com((({]ment*/
 	/*} com((({]ment*/
 	```
 
+
  - result: `false`
+ 
 Process finished with exit code 0
-
-
-
-  
