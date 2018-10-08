@@ -11,7 +11,7 @@ That is `(…[….]….)` is okay, but `(….[….)…..]` is not okay.
 
 Ignore opening and closing symbols within comments (`//` to end 
 of line and inside `/*` to `*/` blocks) and opening and closing symbols 
-immediately following a `\` (back-slash character).  `/*` and `*/` comments 
+immediately following a \ (back-slash character).  `/*` and `*/` comments 
 do NOT stack one `*/` closes any number of `/*` open comment markers.
 
 Test your program by running it with a java program that has all five 
