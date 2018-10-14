@@ -186,4 +186,27 @@ class TextValidatorTest {
                 "/*} com((({]ment*/"
         ).run().isGood);
     }
+
+    @Test
+    void test_7() {
+        Assertions.assertEquals(true, new TextValidator(
+                " abc '()'abc  "
+        ).run().isGood);
+
+        Assertions.assertEquals(false, new TextValidator(
+                " abc '() abc  "
+        ).run().isGood);
+
+        Assertions.assertEquals(false, new TextValidator(
+                " abc'(')abc  "
+        ).run().isGood);
+
+        Assertions.assertEquals(false, new TextValidator(
+                " abc'('abc  "
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(
+                " abc'a' '' '' ' ' ''''  "
+        ).run().isGood);
+    }
 }

@@ -21,8 +21,19 @@ public class TextValidator {
 
     private boolean checkPair(String s) {
         if (pairingRules.containsKey(s)) {
+            String pairClosing = pairingRules.get(s);
+            if (pairClosing.equals(s)) {
+                if (stack.contains(pairClosing)) {
+                    // this is a closing
+                    if ( ! stack.pop().equals(s)) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
             // this is an opening
-            stack.push(pairingRules.get(s));
+            stack.push(pairClosing);
         } else if (pairingRules.containsValue(s)) {
             // this is a closing
             if (stack.isEmpty()) {
@@ -127,5 +138,7 @@ public class TextValidator {
         pairingRules.put("[", "]");
         pairingRules.put("{", "}");
         pairingRules.put("<", ">");
+        pairingRules.put("'", "'");
+        pairingRules.put("\"", "\"");
     }
 }
