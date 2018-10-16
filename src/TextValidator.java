@@ -71,7 +71,7 @@ public class TextValidator {
                 Positioned check = new Positioned<>(pairClosing);
                 if (stack.contains(check)) {
                     // this is a closing
-                    var _pop = stack.pop();
+                    Positioned _pop = stack.pop();
                     if ( ! _pop.content.equals(s)) {
                         return new Positioned<>(_pop.position, false);
                     } else {
@@ -86,7 +86,7 @@ public class TextValidator {
             if (stack.isEmpty()) {
                 return new Positioned<>(false);
             }
-            var _pop = stack.pop();
+            Positioned _pop = stack.pop();
             if ( ! _pop.content.equals(s)) {
                 return new Positioned<>(_pop.position, false);
             }
