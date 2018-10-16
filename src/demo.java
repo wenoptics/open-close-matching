@@ -12,6 +12,12 @@ public class demo {
         result = new TextValidator("[{{})]").run();
         System.out.println("result:" + result);
 
+        result = new TextValidator("[({>)]").run();
+        System.out.println("result:" + result);
+
+        result = new TextValidator("[{{(})]").run();
+        System.out.println("result:" + result);
+
         result = new TextValidator("" +
                 "void hello() { /*com((({]ment*/" +"\n"+
                 "    nice code! /*com((({]ment*/" +"\n"+

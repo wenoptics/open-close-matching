@@ -64,12 +64,13 @@ public class TextValidator {
         if (pairingRules.containsKey(s)) {
             String pairClosing = pairingRules.get(s);
             if (pairClosing.equals(s)) {
+                // quote opening closing are the same
                 Positioned check = new Positioned<>(pairClosing);
                 if (stack.contains(check)) {
                     // this is a closing
-                    int lastOpenPosition = stack.lastIndexOf(check);
-                    if ( ! stack.pop().content.equals(s)) {
-                        return new Positioned<>(lastOpenPosition, false);
+                    var _pop = stack.pop();
+                    if ( ! _pop.content.equals(s)) {
+                        return new Positioned<>(_pop.position, false);
                     } else {
                         return new Positioned<>(true);
                     }
@@ -82,10 +83,9 @@ public class TextValidator {
             if (stack.isEmpty()) {
                 return new Positioned<>(false);
             }
-            Positioned _pop = stack.pop();
+            var _pop = stack.pop();
             if ( ! _pop.content.equals(s)) {
-                int lastOpenPosition = stack.lastIndexOf(new Positioned<>(s));
-                return new Positioned<>(lastOpenPosition, false);
+                return new Positioned<>(_pop.position, false);
             }
         }
         return new Positioned<>(true);
@@ -107,8 +107,7 @@ public class TextValidator {
     }
 
     protected int skipTo(int start, String[] expectings) {
-        int skipped = 0;
-        for (skipped=0; skipped + start <= inputCharSeq.length; skipped++) {
+        for (int skipped=0; skipped + start <= inputCharSeq.length; skipped++) {
             for (String exp: expectings) {
                 if (equalAt(start + skipped, exp)) {
                     return skipped+exp.length();
@@ -162,10 +161,11 @@ public class TextValidator {
             if ( false == cp.content ) {
                 String errMsg = "";
                 if (cp.position != -1) {
-                    errMsg = String.format("Closing at %d->%c not match opening at %d->%c", cursor, inputCharSeq[cursor],
+                    errMsg = String.format("Closing at %d:  %c   not match opening at %d:  %c  ",
+                            cursor, inputCharSeq[cursor],
                             cp.position, inputCharSeq[cp.position]);
                 } else {
-                    errMsg = String.format("No paired for closing at %d->%c", cursor, inputCharSeq[cursor]);
+                    errMsg = String.format("No paired for closing at %d:  %c  ", cursor, inputCharSeq[cursor]);
                 }
                 ValidationResult vr = new ValidationResult(false);
                 vr.message = errMsg;
@@ -181,7 +181,7 @@ public class TextValidator {
         if ( ! stack.isEmpty()) {
             ValidationResult vr = new ValidationResult(false);
             int _p = stack.pop().position;
-            vr.message = String.format("No closing for opening at %d->%c", _p, inputCharSeq[_p]);
+            vr.message = String.format("No closing for opening at %d:  %c  ", _p, inputCharSeq[_p]);
             vr.badStart = cursor;
             return vr;
         }
