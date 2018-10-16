@@ -98,7 +98,7 @@ public class InputGUI {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Match (GUI)");
+        JFrame frame = new JFrame("Open-Close Matching (GUI)");
         frame.setContentPane(new InputGUI().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

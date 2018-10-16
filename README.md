@@ -1,6 +1,36 @@
 # Open-Close Matching
 
-## Assignment Desc.
+by Guangxue Wen (guw16)
+
+Full dev history: [link](https://bitbucket.org/wenop/ds-hw-match/src/master/)
+
+## Feature
+
+Has GUI.
+
+## Run
+
+Headless version as `src/demo.java` 
+or GUI version as `src/InputGUI.java`.
+
+
+## Sample Output
+
+|         Case        | Output |                       Detail                           |
+|---------------------|--------|--------------------------------------------------------|
+| `[({a}{abc})]`      |`true`  |                                                        |
+| `{[abc(}`           |`false` | Error: Closing at 6:  }   not match opening at 5:  (   |
+| `{() /*abc*/ }`     |`true`  |                                                        |
+| `{ /*((}*/ }`       |`true`  |                                                        |
+| `{() /* } * /`       |`false` | Error: Block comment opening without closing at 4     |
+
+
+## GUI screenshot
+
+![](doc/idea64_2018-10-16_14-09-44.png)
+
+
+## Assignment 3 Desc.
 
 Write a program that matches opening and ending symbols in a 
 java program. `()`, `{}`, `[]`, `“”` (double quotes), and `‘’`
@@ -22,20 +52,6 @@ You will have to decide how you want to treat set of quotes (double
 and single) -- do you want to check what is inside of them for 
 opening and closings or treat what is inside the opening and 
 closing quotes as comments that can be ignored.  Either way is okay.
-
-## Demo .class
-
-as `src/demo.java`.
-
-## Sample Output
-
-|         case        | output |
-|---------------------|--------|
-| `[({a}{abc})]`      |`true`  |
-| `{[abc(}`           |`false` |
-| `{() /*abc*/ }`     |`true`  |
-| `{ /*((}*/ }`       |`true`  |
-| `{() /* }* /`       |`false` |
 
 
 ## Full Test Cases Output:
