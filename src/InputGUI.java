@@ -18,12 +18,14 @@ public class InputGUI {
         msgArea.setForeground(Color.GRAY);
         msgArea.setFont(new Font("Arial", Font.ITALIC, 12));
         msgArea.setText(msg);
+        msgArea.setBackground(Color.white);
 
     }
     void setErrorMessage(String msg) {
         msgArea.setForeground(Color.BLACK);
         msgArea.setFont(new Font("Arial", Font.BOLD, 12));
         msgArea.setText(msg);
+        msgArea.setBackground(Color.pink);
     }
 
     public void setCodeDoc(String text, TextValidator.ValidationResult r) {
@@ -68,9 +70,7 @@ public class InputGUI {
         styleNormal = doc.addStyle("styleNormal", null);
         styleError = doc.addStyle("styleError", styleNormal);
         StyleConstants.setForeground(styleNormal, Color.black);
-        StyleConstants.setForeground(styleError, Color.red);
-
-        setCodeDoc("", new TextValidator.ValidationResult(true));
+        StyleConstants.setBackground(styleError, Color.pink);
 
         inputArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -87,18 +87,19 @@ public class InputGUI {
             public void changedUpdate(DocumentEvent e) {
                 validate();
             }
-
-            void validate() {
-                String s = inputArea.getText();
-                TextValidator.ValidationResult r = new TextValidator(s).run();
-                setCodeDoc(s, r);
-            }
         });
+
+        validate();
     }
 
+    private void validate() {
+        String s = inputArea.getText();
+        TextValidator.ValidationResult r = new TextValidator(s).run();
+        setCodeDoc(s, r);
+    }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("InputGUI");
+        JFrame frame = new JFrame("Match (GUI)");
         frame.setContentPane(new InputGUI().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
