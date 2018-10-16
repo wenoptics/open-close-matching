@@ -5,46 +5,90 @@ public class TextValidator {
 
     public class ValidationResult {
         public boolean isGood = false;
+        public int badStart = -1;
+        public int badEnd = -1;
+        public String message = null;
 
         public ValidationResult(boolean isGood) {
             this.isGood = isGood;
         }
+
+        @Override
+        public String toString() {
+            if (isGood) {
+                return "<ValidationResult isGood=true";
+            }
+            return String.format("<ValidationResult isGood=%s, badStart=%d, badEnd=%d message='%s' />",
+                    isGood, badStart, badEnd, message);
+        }
     }
+
+    public class Positioned <E> {
+        public int position = -1;
+        public E content = null;
+
+        public Positioned(int position, E content) {
+            this.position = position;
+            this.content = content;
+        }
+        public Positioned(E content) {
+            this.content = content;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj.getClass() != this.getClass()) {
+                return false;
+            }
+            return ((Positioned) obj).content
+                    .equals(this.content);
+        }
+    }
+
 
     private static HashMap<String, String> pairingRules;
     private static String[] LineBreaks = {"\n", "\r"};
 
-    private Stack<String> stack;
+    private Stack<Positioned> stack;
 
     private String inputString;
     private char[] inputCharSeq;
 
-    private boolean checkPair(String s) {
+    /**
+     *  Check pair and return valid or not
+     * @param p
+     * @param s
+     * @return
+     */
+    private Positioned<Boolean> checkPair(int p, String s) {
         if (pairingRules.containsKey(s)) {
             String pairClosing = pairingRules.get(s);
             if (pairClosing.equals(s)) {
-                if (stack.contains(pairClosing)) {
+                Positioned check = new Positioned<>(pairClosing);
+                if (stack.contains(check)) {
                     // this is a closing
-                    if ( ! stack.pop().equals(s)) {
-                        return false;
+                    int lastOpenPosition = stack.lastIndexOf(check);
+                    if ( ! stack.pop().content.equals(s)) {
+                        return new Positioned<>(lastOpenPosition, false);
                     } else {
-                        return true;
+                        return new Positioned<>(true);
                     }
                 }
             }
             // this is an opening
-            stack.push(pairClosing);
+            stack.push(new Positioned<>(p, pairClosing));
         } else if (pairingRules.containsValue(s)) {
             // this is a closing
             if (stack.isEmpty()) {
-                return false;
+                return new Positioned<>(false);
             }
-            String _pop = stack.pop();
-            if (!_pop.equals(s)) {
-                return false;
+            Positioned _pop = stack.pop();
+            if ( ! _pop.content.equals(s)) {
+                int lastOpenPosition = stack.lastIndexOf(new Positioned<>(s));
+                return new Positioned<>(lastOpenPosition, false);
             }
         }
-        return true;
+        return new Positioned<>(true);
     }
 
     protected boolean equalAt(int start, String test) {
@@ -114,17 +158,35 @@ public class TextValidator {
 
             // so, we got a char which is not //, /* nor */
             //      validate parenthesis matching using a stack
-            if ( ! checkPair( String.valueOf(inputCharSeq[cursor]) )) {
-                return new ValidationResult(false);
+            Positioned<Boolean> cp = checkPair(cursor, String.valueOf(inputCharSeq[cursor]));
+            if ( false == cp.content ) {
+                String errMsg = "";
+                if (cp.position != -1) {
+                    errMsg = String.format("Closing at %d->%c not match opening at %d->%c", cursor, inputCharSeq[cursor],
+                            cp.position, inputCharSeq[cp.position]);
+                } else {
+                    errMsg = String.format("No paired for closing at %d->%c", cursor, inputCharSeq[cursor]);
+                }
+                ValidationResult vr = new ValidationResult(false);
+                vr.message = errMsg;
+                vr.badStart = cp.position;
+                vr.badEnd = cursor;
+                return vr;
             }
 
             cursor++;
         }
 
         // Make sure stack is empty at this point
-        return new ValidationResult(
-                stack.isEmpty()
-        );
+        if ( ! stack.isEmpty()) {
+            ValidationResult vr = new ValidationResult(false);
+            int _p = stack.pop().position;
+            vr.message = String.format("No closing for opening at %d->%c", _p, inputCharSeq[_p]);
+            vr.badStart = cursor;
+            return vr;
+        }
+
+        return new ValidationResult(true);
     }
 
     public TextValidator(String input) {

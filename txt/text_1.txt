@@ -13,4 +13,5 @@ public class Node <E> {  // "don't count }
 	public Node <E> getPrev() {return prev;}
 	public Node <E> getNext() {return next;}
 	public void setPrev (Node <E> p) {prev=p;}
-	public void setNext (Node <E> n) {next=n;} }   
+	public void setNext (Node <E> n) {next=n;}
+}
