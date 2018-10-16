@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="InputGUI">
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="605" height="449"/>
+    </constraints>
+    <properties>
+      <preferredSize width="650" height="450"/>
+    </properties>
+    <border type="bevel-raised"/>
+    <children>
+      <splitpane id="c83e2">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="200"/>
+          </grid>
+        </constraints>
+        <properties>
+          <dividerLocation value="227"/>
+          <orientation value="1"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="1db67" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="3e680" class="javax.swing.JTextArea" binding="msgArea">
+                <constraints border-constraint="South"/>
+                <properties>
+                  <editable value="false"/>
+                </properties>
+              </component>
+              <scrollpane id="abbb4">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="bea0" class="javax.swing.JEditorPane" binding="previewArea">
+                    <constraints/>
+                    <properties>
+                      <background color="-2236963"/>
+                      <contentType value="text/html"/>
+                      <editable value="false"/>
+                      <font name="Consolas"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+          <scrollpane id="9681">
+            <constraints>
+              <splitpane position="left"/>
+            </constraints>
+            <properties>
+              <preferredSize width="0" height="130"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="a228c" class="javax.swing.JTextArea" binding="inputArea">
+                <constraints/>
+                <properties>
+                  <font name="Consolas"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </splitpane>
+    </children>
+  </grid>
+</form>

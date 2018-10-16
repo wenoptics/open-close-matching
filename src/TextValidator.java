@@ -3,7 +3,7 @@ import java.util.Stack;
 
 public class TextValidator {
 
-    public class ValidationResult {
+    public static class ValidationResult {
         public boolean isGood = false;
         public int badStart = -1;
         public int badEnd = -1;
@@ -159,16 +159,14 @@ public class TextValidator {
             //      validate parenthesis matching using a stack
             Positioned<Boolean> cp = checkPair(cursor, String.valueOf(inputCharSeq[cursor]));
             if ( false == cp.content ) {
-                String errMsg = "";
+                ValidationResult vr = new ValidationResult(false);
                 if (cp.position != -1) {
-                    errMsg = String.format("Closing at %d:  %c   not match opening at %d:  %c  ",
+                    vr.message = String.format("Closing at %d:  %c   not match opening at %d:  %c  ",
                             cursor, inputCharSeq[cursor],
                             cp.position, inputCharSeq[cp.position]);
                 } else {
-                    errMsg = String.format("No paired for closing at %d:  %c  ", cursor, inputCharSeq[cursor]);
+                    vr.message = String.format("No paired for closing at %d:  %c  ", cursor, inputCharSeq[cursor]);
                 }
-                ValidationResult vr = new ValidationResult(false);
-                vr.message = errMsg;
                 vr.badStart = cp.position;
                 vr.badEnd = cursor;
                 return vr;
@@ -182,7 +180,7 @@ public class TextValidator {
             ValidationResult vr = new ValidationResult(false);
             int _p = stack.pop().position;
             vr.message = String.format("No closing for opening at %d:  %c  ", _p, inputCharSeq[_p]);
-            vr.badStart = cursor;
+            vr.badStart = _p;
             return vr;
         }
 
