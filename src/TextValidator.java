@@ -58,8 +58,9 @@ public class TextValidator {
 
     /**
      *  Check pair and return valid or not
-     * @param p
-     * @param s
+     *      Used a stack to check
+     * @param p current position
+     * @param s current string
      * @return
      */
     private Positioned<Boolean> checkPair(int p, String s) {
@@ -93,6 +94,12 @@ public class TextValidator {
         return new Positioned<>(true);
     }
 
+    /**
+     * Check if equals to a test string
+     * @param start starting position
+     * @param test string to be found
+     * @return
+     */
     protected boolean equalAt(int start, String test) {
         if (start < 0) {
             throw new IllegalArgumentException("start < 0");
@@ -108,6 +115,12 @@ public class TextValidator {
         return true;
     }
 
+    /**
+     *  Start from somewhere, find the expecting substring, and return the number of skipped characters
+     * @param start
+     * @param expectings
+     * @return
+     */
     protected int skipTo(int start, String[] expectings) {
         for (int skipped=0; skipped + start <= inputCharSeq.length; skipped++) {
             for (String exp: expectings) {

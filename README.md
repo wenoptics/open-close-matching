@@ -28,7 +28,7 @@ or GUI version as `src/InputGUI.java`.
 
 ## GUI screenshot
 
-![](doc/idea64_2018-10-16_14-09-44.png)
+![](doc/idea64_2018-10-16_15-15-23.png)
 
 
 ## Assignment 3 Desc.
