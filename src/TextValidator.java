@@ -143,8 +143,11 @@ public class TextValidator {
                 int c = skipTo(cursor, new String[]{"*/"});
                 if (c < 0) {
                     // no closing */ found
-                    // todo: should we consider this as GOOD ?
-                    return new ValidationResult(true);
+                    ValidationResult vr = new ValidationResult(false);
+                    vr.badStart = cursor-2;
+                    vr.badEnd = cursor-1;
+                    vr.message = "Block comment opening without closing at " + vr.badStart;
+                    return vr;
                 }
                 // ignore all the contents in between
                 cursor += c;
@@ -152,7 +155,11 @@ public class TextValidator {
             }
             if (equalAt(cursor, "*/")) {
                 // if a */ closing without a /* opening, simply fail it
-                return new ValidationResult(false);
+                ValidationResult vr = new ValidationResult(false);
+                vr.badStart = cursor;
+                vr.badEnd = cursor + 1;
+                vr.message = "Block comment closing without opening at " + cursor;
+                return vr;
             }
 
             // so, we got a char which is not //, /* nor */
