@@ -1,9 +1,6 @@
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.text.*;
 import java.awt.*;
 
 public class InputGUI {
@@ -68,9 +65,11 @@ public class InputGUI {
 
         // Create a style object and then set the style attributes
         styleNormal = doc.addStyle("styleNormal", null);
-        styleError = doc.addStyle("styleError", styleNormal);
         StyleConstants.setForeground(styleNormal, Color.black);
+        StyleConstants.setFontFamily(styleNormal, "Monospace");
+        styleError = doc.addStyle("styleError", styleNormal);
         StyleConstants.setBackground(styleError, Color.pink);
+        StyleConstants.setBold(styleError, true);
 
         inputArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
