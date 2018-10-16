@@ -32,7 +32,7 @@ or GUI version as `src/InputGUI.java`.
 
 ## GUI screenshot
 
-![](doc/idea64_2018-10-16_15-15-23.png)
+![](assets/idea64_2018-10-16_15-15-23.png)
 
 
 ## Sample Output
