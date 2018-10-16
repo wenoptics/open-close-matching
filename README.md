@@ -22,7 +22,8 @@ or GUI version as `src/InputGUI.java`.
 | `{[abc(}`           |`false` | Error: Closing at 6:  }   not match opening at 5:  (   |
 | `{() /*abc*/ }`     |`true`  |                                                        |
 | `{ /*((}*/ }`       |`true`  |                                                        |
-| `{() /* } * /`       |`false` | Error: Block comment opening without closing at 4     |
+| `{() /* } * /`      |`false` | Error: Block comment opening without closing at 4     |
+| `{ [ (\ ]  }`       |`true`  |                                                        |
 
 
 ## GUI screenshot

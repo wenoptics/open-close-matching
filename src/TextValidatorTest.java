@@ -209,4 +209,35 @@ class TextValidatorTest {
                 " abc'a' '' '' ' ' ''''  "
         ).run().isGood);
     }
+
+    @Test
+    void test_8_backslashed() {
+        Assertions.assertEquals(false, new TextValidator(
+                " abc '()'\\abc  "
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(
+                " abc '\\() abc  "
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(
+                " abc'\\('\\)abc  "
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(
+                " \\"
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(
+                " a\\()"
+        ).run().isGood);
+
+        Assertions.assertEquals(false, new TextValidator(
+                " a\\("
+        ).run().isGood);
+
+        Assertions.assertEquals(true, new TextValidator(
+                "([\\)"
+        ).run().isGood);
+    }
 }

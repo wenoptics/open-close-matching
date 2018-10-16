@@ -66,7 +66,7 @@
                 <constraints/>
                 <properties>
                   <font name="Consolas"/>
-                  <text value="Package Homework;&#10;/* &#10;    don't count (&#10;*/&#10;public class Node &lt;E&gt; {  // &quot;don't count }&#10;  public Node (E e, Node&lt;E&gt; p, Node&lt;E&gt; n) &#10;  {  &#10;    element=e;      &#10;    prev=p;&#10;    next=  ]   &#10;  }          &#10;  System.out.println(&quot;\nNewLine&quot;);&#10;  public E getElement() {return element;}&#10;  public Node &lt;E&gt; getPrev() {return prev;}&#10;  public Node &lt;E&gt; getNext() {return next;}&#10;  public void setPrev (Node &lt;E&gt; p) {prev=p;}&#10;  public void setNext (Node &lt;E&gt; n) {next=n;}&#10;}&#10;"/>
+                  <text value="Package Homework;&#10;/* &#10;    don't count (&#10;*/&#10;public class Node &lt;E&gt; {  // &quot;don't count }&#10;  public Node (E e, Node&lt;E&gt; p, Node&lt;E&gt; n) &#10;  {  &#10;    element=e;      &#10;    prev=p;&#10;    next=  ]   &#10;  }          &#10;  System.out.println(&quot; \nNewLine&quot;);&#10;  public E getElement() {return element;}&#10;  public Node &lt;E&gt; getPrev() {return prev;}&#10;  public Node &lt;E&gt; getNext() {return next;}&#10;  public void setPrev (Node &lt;E&gt; p) {prev=p;}&#10;  public void setNext (Node &lt;E&gt; n) {next=n;}&#10;}&#10;"/>
                 </properties>
               </component>
             </children>

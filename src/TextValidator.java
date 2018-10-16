@@ -1,4 +1,6 @@
+// by Guangxue Wen (GUW16)
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Stack;
 
 public class TextValidator {
@@ -45,8 +47,8 @@ public class TextValidator {
         }
     }
 
-
     private static HashMap<String, String> pairingRules;
+    private static HashSet<String> pairingChars;
     private static String[] LineBreaks = {"\n", "\r"};
 
     private Stack<Positioned> stack;
@@ -162,8 +164,23 @@ public class TextValidator {
                 return vr;
             }
 
-            // so, we got a char which is not //, /* nor */
-            //      validate parenthesis matching using a stack
+            // Check if there a following backslash \
+            boolean ignore = false;
+            for (String s : pairingChars) {
+                String _ts = s + '\\';
+                if (equalAt(cursor, _ts)) {
+                    // ignore them as assignment required
+                    cursor += _ts.length();
+                    ignore = true;
+                    break;
+                }
+            }
+            if (ignore) {
+                continue;
+            }
+
+            // so, we got a char which is not //, /* nor */, nor \ escaped
+            //      now validate parenthesis matching using a stack
             Positioned<Boolean> cp = checkPair(cursor, String.valueOf(inputCharSeq[cursor]));
             if ( false == cp.content ) {
                 ValidationResult vr = new ValidationResult(false);
@@ -207,5 +224,12 @@ public class TextValidator {
         pairingRules.put("<", ">");
         pairingRules.put("'", "'");
         pairingRules.put("\"", "\"");
+
+        // init the pairingCharsSet
+        pairingChars = new HashSet<>();
+        for (String k: pairingRules.keySet()) {
+            pairingChars.add(k);
+            pairingChars.add(pairingRules.get(k));
+        }
     }
 }
