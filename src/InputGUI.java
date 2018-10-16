@@ -2,12 +2,17 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.nio.file.Files;
 
 public class InputGUI {
     private JPanel rootPanel;
     private JEditorPane previewArea;
     private JTextArea inputArea;
     private JTextArea msgArea;
+    private JButton btnOpenFile;
 
     private Style styleNormal, styleError;
 
@@ -85,6 +90,27 @@ public class InputGUI {
             @Override
             public void changedUpdate(DocumentEvent e) {
                 validate();
+            }
+        });
+
+        btnOpenFile.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //Create a file chooser
+                final JFileChooser fc = new JFileChooser();
+                //In response to a button click:
+                int returnVal = fc.showOpenDialog(InputGUI.this.rootPanel);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = fc.getSelectedFile();
+                    //This is where a real application would open the file.
+                    System.out.println("Opening: " + file.getAbsolutePath());
+                    try {
+                        inputArea.setText(Helper.readFileAsString(file.getAbsolutePath()));
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                    validate();
+                }
             }
         });
 

@@ -6,7 +6,7 @@ Full dev history: [link](https://bitbucket.org/wenop/ds-hw-match/src/master/)
 
 ## Feature
 
-Has GUI.
+Has GUI. Can select file to be validated from GUI.
 
 ## Run
 
