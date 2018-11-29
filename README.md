@@ -1,5 +1,9 @@
 # Open-Close Matching
 
+## GUI screenshot
+
+![](assets/2018-10-16_17-47-02.gif)
+
 ## DS Assignment 3 Desc.
 
 Write a program that matches opening and ending symbols in a 
@@ -28,12 +32,6 @@ closing quotes as comments that can be ignored.  Either way is okay.
 
 Headless version as `src/demo.java` 
 or GUI version as `src/InputGUI.java`.
-
-
-## GUI screenshot
-
-![](assets/2018-10-16_17-47-02.gif)
-
 
 ## Sample Output
 
